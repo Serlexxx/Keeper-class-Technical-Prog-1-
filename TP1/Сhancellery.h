@@ -1,5 +1,5 @@
 #pragma once
-#include "Keeper.h"
+#include "Bookstore.h"
 
 class Chancellery :public Bookstore {
 private:
@@ -8,7 +8,7 @@ private:
 	std::string purpose;
 	float price;
 public:
-	void getInfo();
-	void setInfo(std::string type, std::string color, std::string purpose, float price);
-	void editInfo(char ind);
+	void getInfo() override;
+	void setInfo(int ind, std::string str) override;
+	void editInfo(int ind) override;
 };

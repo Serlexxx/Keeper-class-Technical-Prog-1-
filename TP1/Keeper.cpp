@@ -1,37 +1,37 @@
 #include "Keeper.h"
 
-Bookstore::Bookstore() {
+Keeper::Keeper() {
 	this->data = nullptr;
 	this->size = 0;
 }
 
-Bookstore::Bookstore(int length) {
+Keeper::Keeper(int length) {
 	this->size = length;
 	this->data = (length > 0 ? (Bookstore*)malloc(length*sizeof(Bookstore)) : nullptr);
 }
 
-Bookstore::~Bookstore() {
+Keeper::~Keeper() {
 	free(data);
 }
 
-void Bookstore::Remove() {
+void Keeper::Remove() {
 	free(data);
 
 	this->data = nullptr;
 	this->size = 0;
 }
 
-int Bookstore::getSize() {
+int Keeper::getSize() {
 	return size;
 }
 
-Bookstore& Bookstore::operator[](int ind) {
+Bookstore& Keeper::operator[](int ind) {
 	if (ind >= 0 && ind < size)
 		return data[ind];
-	else return;
+	else std:: cout << "\n¬веден неверный индекс\n";
 }
 
-void Bookstore::realloCate(int newSize) {
+void Keeper::realloCate(int newSize) {
 	Remove();
 	if(newSize <= 0) return;
 	
@@ -39,37 +39,53 @@ void Bookstore::realloCate(int newSize) {
 	this->size = newSize;
 }
 
-void Bookstore::reSize(int newSize) {
+void Keeper::reSize(int newSize) {
 	if (newSize == size) return;
 	if (newSize <= 0) {
 		Remove();
 		return;
 	}
-	this->data = (Bookstore*)realloc(data, newSize*sizeof(Bookstore));
-	this->size = newSize;
+	Bookstore* new_data = (Bookstore*)malloc(newSize * sizeof(Bookstore));
+	if(this->size > 0) {
+		int copyid = (newSize > this->size) ? this->size : newSize;
+		for (int i = 0; i < copyid; ++i) {
+			new_data[i] = this->data[i];
+		}
+		free(data);
+		this->data = new_data;
+		this->size = newSize;
+	}
 }
 
-void Bookstore::addElement(Bookstore* element, int ind) {
-	if (ind < 0 && ind >size) return;
+void Keeper::addElement(Bookstore& element, int ind) {
+	if (ind < 0 && ind >this->size) return;
+	Bookstore* new_data = (Bookstore*)malloc((this->size + 1) * sizeof(Bookstore));
+	for (int i = 0; i < ind; ++i) {
+		new_data[i] = this->data[i];
+	}
+	new_data[ind] = element;
+	for (int i = ind; i < this->size; ++i) {
+		new_data[i + 1] = this->data[i];
+	}
+	free(data);
+	this->data = new_data;
 	this->size++;
-	this->data = (Bookstore*)realloc(data, size * sizeof(Bookstore));
-	data[ind] = element;
 }
 
-void Bookstore::removeElement(int ind) {
+void Keeper::removeElement(int ind) {
 	if (ind < 0 && ind >= size) return;
 	if (this->size == 1) {
 		Remove();
 		return;
 	}
-	Bookstore* data_new = (Bookstore*)malloc((this->size - 1) * sizeof(Bookstore));
+	Bookstore* new_data = (Bookstore*)malloc((this->size - 1) * sizeof(Bookstore));
 	for (int i = 0; i < ind; i++) {
-		data_new[i] = data[i];
+		new_data[i] = data[i];
 	}
 	for (int i = ind + 1; i < this->size; i++) {
-		data_new[i] = data[i];
+		new_data[i] = this->data[i];
 	}
 	free(data);
-	this->data = data_new;
+	this->data = new_data;
 	--size;
 }

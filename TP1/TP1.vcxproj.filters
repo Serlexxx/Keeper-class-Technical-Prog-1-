@@ -26,6 +26,9 @@
     <ClCompile Include="Chancellery.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Bookstore.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Keeper.h">
@@ -38,6 +41,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Сhancellery.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Bookstore.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

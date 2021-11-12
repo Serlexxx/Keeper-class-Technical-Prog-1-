@@ -1,23 +1,39 @@
 #include "Book.h"
 
-void Book::setInfo(std::string name, std::string author, int year, std::string annotation,
-	std::string genre, int pages, float price) {
-	this->name = name;
-	this->author = author;
-	this->year = year;
-	this->annotation = annotation;
-	this->genre = genre;
-	this->pages = pages;
-	this->price = price;
+void Book::setInfo(int ind, std::string str) {
+	switch (ind)
+	{
+	case '1':
+		this->name=str;
+		break;
+	case'2':
+		this->author=str;
+		break;
+	case '3':
+		this->year= stoi(str, NULL, 10);
+		break;
+	case '4':
+		this->annotation =str;
+		break;
+	case '5':
+		this->genre = str;
+		break;
+	case '6':
+		this->pages= stoi(str, NULL, 10);
+		break;
+	case '7':
+		this->price= round(stof(str, NULL) * 100) / 100;
+		break;
+	}
 }
 
 void Book::getInfo() {
 	std::cout.setf(10);
-	std::cout << name << " || " << author << " || " << year << " || " << annotation << std::endl <<
-		genre << " || " << pages << " || " << price;
+	std::cout <<"book\n" << name << " || " << author << " || " << year << " || " << annotation << std::endl <<
+		genre << " || " << pages << " || " << price<< std::endl;
 }
 
-void Book::editInfo(char ind) {
+void Book::editInfo(int ind) {
 	switch (ind)
 	{
 	case '1':
