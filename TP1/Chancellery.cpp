@@ -1,6 +1,11 @@
 #include "Ñhancellery.h"
 
-void Chancellery::setInfo(int ind, std::string str) {
+Chancellery::Chancellery() {
+
+}
+
+int Chancellery::setInfo(int ind, std::string str) {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	switch (ind)
 	{
 	case 1:
@@ -12,15 +17,28 @@ void Chancellery::setInfo(int ind, std::string str) {
 	case 3:
 		this->purpose = str;
 		break;
-	case 4:
-		this->price = round(stof(str, NULL) * 100) / 100;
+	case 4: {
+		try {
+			this->price = round(stof(str, NULL) * 100) / 100;
+		}
+		catch (const std::invalid_argument& ia) {
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			std::cout << "Ïîïðîáóéòå ñíîâà!\n";
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+			return ind;
+		}
 		break;
 	}
+	}
+	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);
+	std::cout << "Chancellery.SetInfo(" << ind << ")\n";
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	return ++ind;
 }
 
-void Chancellery::getInfo() {
-	std::cout.setf(10);
-	std::cout <<"chacne\n"<< type << " || " << color << " || " << purpose << " || " << price<< std::endl;
+std::string Chancellery::getInfo() {
+	std::string str = "chancellery "+this->type + " " + this->color + " " + this->purpose + " " + std::to_string(this->price) + "\n";
+	return str;
 }
 
 void Chancellery::editInfo(int ind) {
@@ -39,4 +57,16 @@ void Chancellery::editInfo(int ind) {
 		std::cin >> price;
 		break;
 	}
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);
+	std::cout << "Chancellery.EditInfo(" << ind << ")\n";
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
+
+Chancellery::~Chancellery() {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);
+	std::cout << "~Chacnellery()\n";
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+}
+

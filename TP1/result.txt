@@ -1,0 +1,6 @@
+textbook 1 1 1 1 1 1 1,000000
+textbook 1 1 1 1 1 1 1,000000
+book   -858993460   -858993460 -107374176,000000
+chancellery pancil orange pisat 5,000000
+textbook 1 1 1 1 1 1 1,000000
+textbook 1 1 1 1 1 1 1,000000

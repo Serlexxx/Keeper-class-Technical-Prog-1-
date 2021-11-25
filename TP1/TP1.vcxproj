@@ -144,12 +144,15 @@
     <ClCompile Include="Chancellery.cpp" />
     <ClCompile Include="Keeper.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Painter.cpp" />
     <ClCompile Include="TextBook.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="Bookstore.h" />
     <ClInclude Include="Keeper.h" />
+    <ClInclude Include="Painter.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="TextBook.h" />
     <ClInclude Include="Сhancellery.h" />
   </ItemGroup>

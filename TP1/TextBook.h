@@ -11,8 +11,9 @@ private:
 	int pages;
 	float price;
 public:
-	void getInfo() override;
-	void setInfo(int ind, std::string str) override;
+	TextBook();
+	std::string getInfo() override;
+	int setInfo(int ind, std::string str) override;
 	void editInfo(int ind) override;
 	~TextBook() override;
 };
